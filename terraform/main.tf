@@ -9,15 +9,15 @@ terraform {
   }
 }
 
+variable "aws_profile" {
+  description = "AWS CLI profile to use (leave empty in CI)"
+  type        = string
+  default     = null
+}
+
 provider "aws" {
   region  = "us-west-2"
   profile = var.aws_profile
-}
-
-variable "aws_profile" {
-  description = "AWS CLI profile to use"
-  type        = string
-  default     = "default"
 }
 
 locals {
