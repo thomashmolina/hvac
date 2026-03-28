@@ -20,13 +20,12 @@ variable "aws_profile" {
   default     = "default"
 }
 
-variable "bucket_name" {
-  description = "Name of the S3 bucket for the static website"
-  type        = string
+locals {
+  bucket_name = "hvac-site"
 }
 
 resource "aws_s3_bucket" "website" {
-  bucket = var.bucket_name
+  bucket = local.bucket_name
 }
 
 resource "aws_s3_bucket_website_configuration" "website" {
@@ -73,5 +72,5 @@ output "website_url" {
 }
 
 output "bucket_name" {
-  value = aws_s3_bucket.website.bucket
+  value = local.bucket_name
 }
