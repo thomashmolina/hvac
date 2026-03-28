@@ -18,6 +18,11 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
+      - name: Ensure Terraform state bucket exists
+        run: |
+          aws s3api head-bucket --bucket hvac-terraform-state 2>/dev/null || \
+          aws s3api create-bucket --bucket hvac-terraform-state --region us-west-2 \
+            --create-bucket-configuration LocationConstraint=us-west-2
       - uses: hashicorp/setup-terraform@v3
       - name: Terraform Init
         working-directory: terraform

@@ -7,6 +7,12 @@ terraform {
       version = "~> 5.0"
     }
   }
+
+  backend "s3" {
+    bucket = "hvac-terraform-state"
+    key    = "terraform.tfstate"
+    region = "us-west-2"
+  }
 }
 
 variable "aws_profile" {
