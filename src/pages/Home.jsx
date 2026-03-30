@@ -1,5 +1,23 @@
 import InquiryForm from '../components/InquiryForm'
 
+const reviews = [
+  {
+    name: 'Juan R.',
+    rating: 5,
+    text: 'Ricardo did an amazing job replacing our furnace. He showed up quickly when we were freezing due to a faulty furnace. He was super honest and gave us a great price. He explained everything clearly and kept us in the loop the whole time. The work was done efficiently and professionally, with no stress or the classic "final price surprise". Highly recommend!',
+  },
+  {
+    name: 'David C.',
+    rating: 5,
+    text: 'Ricardo arrived right on time, super professional and courteous the whole visit. He clearly knows HVAC systems inside out and explained the issue in plain English. He diagnosed the problem fast, fixed my furnace efficiently, and did a thorough, clean job. No pushy upsells at all. What really stood out was his honesty: fair pricing with zero surprise charges.',
+  },
+  {
+    name: 'Carlos D.',
+    rating: 5,
+    text: 'My air conditioner stopped working, and I texted Ricardo after 6 PM. Even though it was late, he quickly replied and came to my house in less than an hour. Ricardo is extremely friendly, attentive, and reliable. Every time I reached out to him, he responded promptly and with great care. I highly recommend his services.',
+  },
+]
+
 const workImages = [
   { src: '/images/commercial/rooftop-unit-1.webp', alt: 'Commercial rooftop HVAC unit installation' },
   { src: '/images/commercial/rooftop-unit-2.webp', alt: 'Commercial rooftop HVAC unit' },
@@ -42,6 +60,25 @@ export default function Home() {
             <div key={s.title} className="p-6 border border-blue-100 dark:border-blue-800 rounded-xl bg-blue-50/50 dark:bg-blue-900/20">
               <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">{s.title}</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="px-6 py-12 border-t border-blue-100 dark:border-blue-800 bg-blue-900 dark:bg-blue-950">
+        <h2 className="text-2xl font-bold text-center mb-2 text-white">What Our Customers Say</h2>
+        <p className="text-center text-blue-200 text-sm mb-8">5.0 stars on Google</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {reviews.map((r) => (
+            <div key={r.name} className="p-6 bg-white dark:bg-gray-800 rounded-xl">
+              <div className="flex items-center gap-1 mb-3">
+                {Array.from({ length: r.rating }, (_, i) => (
+                  <span key={i} className="text-yellow-400 text-lg">&#9733;</span>
+                ))}
+              </div>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4">"{r.text}"</p>
+              <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">{r.name}</p>
             </div>
           ))}
         </div>

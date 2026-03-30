@@ -45,6 +45,8 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
       - run: bun run build
+        env:
+          VITE_API_URL: https://respectable-vi-thomashmolina-13c4c944.koyeb.app
       - run: aws s3 sync dist/ s3://hvac-site --delete
       - name: Invalidate CloudFront cache
         run: aws cloudfront create-invalidation --distribution-id ${{ steps.cloudfront.outputs.dist_id }} --paths "/*"
