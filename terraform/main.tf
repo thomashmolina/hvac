@@ -26,8 +26,30 @@ provider "aws" {
   profile = var.aws_profile
 }
 
+# ACM certs for CloudFront must be in us-east-1
+provider "aws" {
+  alias   = "us_east_1"
+  region  = "us-east-1"
+  profile = var.aws_profile
+}
+
 locals {
   bucket_name = "hvac-site"
+  domain_name = "hvaccowboy.com"
+  alt_names   = ["hvaccowboy.com", "www.hvaccowboy.com"]
+}
+
+# --- SSL Certificate ---
+
+resource "aws_acm_certificate" "website" {
+  provider          = aws.us_east_1
+  domain_name       = local.domain_name
+  subject_alternative_names = ["www.${local.domain_name}"]
+  validation_method = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_s3_bucket" "website" {
@@ -82,6 +104,7 @@ resource "aws_cloudfront_distribution" "website" {
 
   enabled             = true
   default_root_object = "index.html"
+  aliases             = local.alt_names
 
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD"]
@@ -117,7 +140,9 @@ resource "aws_cloudfront_distribution" "website" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = aws_acm_certificate.website.arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 }
 
@@ -131,4 +156,20 @@ output "cloudfront_distribution_id" {
 
 output "bucket_name" {
   value = local.bucket_name
+}
+
+output "acm_validation_records" {
+  description = "DNS records to add at your registrar for certificate validation"
+  value = {
+    for dvo in aws_acm_certificate.website.domain_validation_options : dvo.domain_name => {
+      type  = dvo.resource_record_type
+      name  = dvo.resource_record_name
+      value = dvo.resource_record_value
+    }
+  }
+}
+
+output "domain_dns_target" {
+  description = "Point your domain's A/CNAME record to this CloudFront domain"
+  value       = aws_cloudfront_distribution.website.domain_name
 }
