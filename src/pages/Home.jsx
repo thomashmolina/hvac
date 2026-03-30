@@ -35,11 +35,11 @@ export default function Home() {
   return (
     <div className="flex flex-col bg-white dark:bg-gray-900">
       {/* Hero */}
-      <section className="relative w-full min-h-[400px] md:min-h-[500px] flex items-center justify-center overflow-hidden">
+      <section className="relative w-full min-h-[450px] md:min-h-[600px] flex items-center justify-center overflow-hidden">
         <img
           src="/images/hero/company-vehicle.webp"
           alt="Cowboy Heating & Air service vehicle"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-[center_85%]"
         />
         <div className="relative z-10 text-center p-8 bg-blue-900/75 rounded-xl max-w-xl backdrop-blur-sm">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Cowboy Heating & Air</h1>
