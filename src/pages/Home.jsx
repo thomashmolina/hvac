@@ -39,7 +39,7 @@ export default function Home() {
         <img
           src="/images/hero/company-vehicle.webp"
           alt="Cowboy Heating & Air service vehicle"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-bottom"
         />
         <div className="relative z-10 text-center p-8 bg-blue-900/75 rounded-xl max-w-xl backdrop-blur-sm">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Cowboy Heating & Air</h1>
