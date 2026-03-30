@@ -18,7 +18,7 @@ export default function Register() {
     setSubmitting(true)
     try {
       await register(name, email, password)
-      navigate('/')
+      navigate('/admin')
     } catch (err) {
       setError(err.message)
     } finally {
@@ -63,7 +63,7 @@ export default function Register() {
           {submitting ? 'Creating account...' : 'Register'}
         </button>
         <p className="alt-link">
-          Already have an account? <Link to="/login">Sign in</Link>
+          Already have an account? <Link to="/admin/login">Sign in</Link>
         </p>
       </form>
     </div>

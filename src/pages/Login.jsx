@@ -17,7 +17,7 @@ export default function Login() {
     setSubmitting(true)
     try {
       await login(email, password)
-      navigate('/')
+      navigate('/admin')
     } catch (err) {
       setError(err.message)
     } finally {
@@ -53,7 +53,7 @@ export default function Login() {
           {submitting ? 'Signing in...' : 'Sign in'}
         </button>
         <p className="alt-link">
-          Don't have an account? <Link to="/register">Register</Link>
+          Don't have an account? <Link to="/admin/register">Register</Link>
         </p>
       </form>
     </div>
