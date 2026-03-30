@@ -86,3 +86,11 @@ export const auth = {
       body: JSON.stringify({ current_password, new_password }),
     }),
 }
+
+export const inquiries = {
+  create: (data) =>
+    rawRequest('/api/v1/inquiries', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+}
