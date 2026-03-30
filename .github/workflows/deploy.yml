@@ -42,12 +42,9 @@ jobs:
         id: cloudfront
         working-directory: terraform
         run: echo "dist_id=$(terraform output -raw cloudfront_distribution_id)" >> "$GITHUB_OUTPUT"
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - run: npm ci
-      - run: npm run build
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run build
       - run: aws s3 sync dist/ s3://hvac-site --delete
       - name: Invalidate CloudFront cache
         run: aws cloudfront create-invalidation --distribution-id ${{ steps.cloudfront.outputs.dist_id }} --paths "/*"
