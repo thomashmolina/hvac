@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <div className="flex flex-col bg-white dark:bg-gray-900">
       {/* Hero */}
-      <section className="relative w-full min-h-[450px] md:min-h-[600px] flex items-center justify-center overflow-hidden">
+      <section className="relative w-full min-h-[450px] md:min-h-[600px] flex items-start justify-center pt-12 md:pt-16 overflow-hidden">
         <img
           src="/images/hero/company-vehicle.webp"
           alt="Cowboy Heating & Air service vehicle"
