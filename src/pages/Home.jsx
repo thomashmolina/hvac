@@ -74,13 +74,13 @@ export default function Home() {
         <a href="https://www.google.com/search?q=cowboy+hvac#lrd=0x8752815c4ef9ac27:0x519ab867e24d7b1,1" target="_blank" rel="noopener noreferrer" className="block text-center text-blue-200 text-sm mb-8 hover:text-white transition-colors">5.0 stars on Google &rarr;</a>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {reviews.map((r) => (
-            <div key={r.name} className="p-6 bg-white dark:bg-gray-800 rounded-xl">
+            <div key={r.name} className="p-6 bg-white dark:bg-gray-800 rounded-xl flex flex-col">
               <div className="flex items-center gap-1 mb-3">
                 {Array.from({ length: r.rating }, (_, i) => (
                   <span key={i} className="text-yellow-400 text-lg">&#9733;</span>
                 ))}
               </div>
-              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4">"{r.text}"</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 flex-1">"{r.text}"</p>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">{r.name}</p>
                 <a href={r.url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 dark:text-blue-400 hover:underline">View on Google</a>
