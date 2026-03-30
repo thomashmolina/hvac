@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import './Login.css'
 
 export default function Login() {
+  const [searchParams] = useSearchParams()
+  const expired = searchParams.get('expired') === '1'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState(expired ? 'Your session has expired. Please sign in again.' : '')
   const [submitting, setSubmitting] = useState(false)
   const { login } = useAuth()
   const navigate = useNavigate()

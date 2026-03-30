@@ -1,6 +1,8 @@
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080'
 
-async function request(path, options = {}) {
+let refreshPromise = null
+
+async function rawRequest(path, options = {}) {
   const token = localStorage.getItem('token')
   const headers = { 'Content-Type': 'application/json', ...options.headers }
   if (token) headers['Authorization'] = `Bearer ${token}`
@@ -9,28 +11,72 @@ async function request(path, options = {}) {
   const data = await res.json().catch(() => null)
 
   if (!res.ok) {
-    throw new Error(data?.error || `Request failed (${res.status})`)
+    const err = new Error(data?.error || `Request failed (${res.status})`)
+    err.status = res.status
+    throw err
   }
   return data
 }
 
+async function tryRefresh() {
+  const refreshToken = localStorage.getItem('refresh_token')
+  if (!refreshToken) return false
+
+  // Deduplicate concurrent refresh attempts
+  if (!refreshPromise) {
+    refreshPromise = rawRequest('/api/v1/auth/refresh', {
+      method: 'POST',
+      body: JSON.stringify({ refresh_token: refreshToken }),
+    }).finally(() => { refreshPromise = null })
+  }
+
+  try {
+    const data = await refreshPromise
+    localStorage.setItem('token', data.token)
+    return true
+  } catch {
+    return false
+  }
+}
+
+async function request(path, options = {}) {
+  try {
+    return await rawRequest(path, options)
+  } catch (err) {
+    if (err.status !== 401) throw err
+
+    const refreshed = await tryRefresh()
+    if (refreshed) {
+      return await rawRequest(path, options)
+    }
+
+    // Refresh failed — clear tokens and redirect
+    localStorage.removeItem('token')
+    localStorage.removeItem('refresh_token')
+    if (window.location.pathname.startsWith('/admin')) {
+      window.location.href = '/admin/login?expired=1'
+    }
+    throw err
+  }
+}
+
 export const auth = {
   login: (email, password) =>
-    request('/api/v1/auth/login', {
+    rawRequest('/api/v1/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     }),
   register: (name, email, password) =>
-    request('/api/v1/auth/register', {
+    rawRequest('/api/v1/auth/register', {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
     }),
   logout: () =>
-    request('/api/v1/auth/logout', { method: 'POST' }),
+    rawRequest('/api/v1/auth/logout', { method: 'POST' }),
   me: () =>
     request('/api/v1/auth/me'),
   refresh: (refresh_token) =>
-    request('/api/v1/auth/refresh', {
+    rawRequest('/api/v1/auth/refresh', {
       method: 'POST',
       body: JSON.stringify({ refresh_token }),
     }),
