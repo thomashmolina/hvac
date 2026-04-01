@@ -1,4 +1,5 @@
 import InquiryForm from '../components/InquiryForm'
+import Logo from '../components/Logo'
 import { Snowflake, Flame, Building2, ChefHat } from 'lucide-react'
 
 const reviews = [
@@ -73,8 +74,8 @@ export default function Home() {
       {/* Sticky Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-blue-900 text-white shadow-lg">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <span className="font-bold text-lg hidden sm:block">Cowboy Heating & Air</span>
-          <span className="font-bold text-lg sm:hidden">Cowboy H&A</span>
+          <a href="/" className="hidden sm:block"><Logo light className="scale-75 origin-left" /></a>
+          <a href="/" className="sm:hidden font-bold text-lg">Cowboy H&A</a>
           <div className="flex items-center gap-3">
             <a href="tel:801-940-0420" className="flex items-center gap-2 text-sm font-medium hover:text-blue-200 transition-colors">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
@@ -100,7 +101,9 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
         <div className="relative z-10 text-center p-8 bg-blue-900/75 rounded-xl max-w-xl backdrop-blur-sm">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Cowboy Heating & Air</h1>
+          <h1 className="flex justify-center mb-4">
+            <Logo light className="scale-150" />
+          </h1>
           <p className="text-blue-100 mb-2">Commercial Kitchen Equipment &middot; Heating &middot; Air Conditioning</p>
           <p className="text-amber-300 text-sm font-medium mb-6">Utah Valley's Award-Winning HVAC Team</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
