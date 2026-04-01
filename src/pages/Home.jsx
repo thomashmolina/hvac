@@ -26,8 +26,12 @@ const workImages = [
   { src: '/images/commercial/rooftop-unit-2.webp', alt: 'Commercial rooftop HVAC unit' },
   { src: '/images/commercial/control-board.webp', alt: 'HVAC control board and wiring' },
   { src: '/images/commercial/exhaust-fan.webp', alt: 'Commercial exhaust fan installation' },
+  { src: '/images/commercial/rooftop-service.webp', alt: 'Commercial rooftop unit refrigerant service' },
   { src: '/images/residential/ac-service.webp', alt: 'Residential AC refrigerant service' },
   { src: '/images/residential/ac-unit.webp', alt: 'Residential AC unit service' },
+  { src: '/images/residential/condenser-install.webp', alt: 'New residential condenser installation' },
+  { src: '/images/residential/daikin-service.webp', alt: 'Daikin mini-split service' },
+  { src: '/images/residential/furnace-diagnostics.webp', alt: 'Bryant furnace diagnostics' },
 ]
 
 export default function Home() {
@@ -63,6 +67,17 @@ export default function Home() {
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{s.desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Award */}
+      <section className="px-6 py-12 border-t border-blue-100 dark:border-blue-800 bg-gray-50 dark:bg-gray-800/50">
+        <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8">
+          <img src="/images/awards/award-plaque.webp" alt="Best of BusinessRate 2025 - HVAC Contractor, Lehi Utah" className="w-64 rounded-lg shadow-lg" />
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-100 mb-2">Award-Winning Service</h2>
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">Voted <strong>Best HVAC Contractor</strong> in Lehi, Utah by BusinessRate 2025 based on Google Reviews. We're proud to deliver honest, reliable service to Utah Valley.</p>
+          </div>
         </div>
       </section>
 
