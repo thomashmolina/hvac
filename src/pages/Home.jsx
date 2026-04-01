@@ -28,7 +28,6 @@ const workImages = [
   { src: '/images/commercial/exhaust-fan.webp', alt: 'Commercial exhaust fan installation' },
   { src: '/images/residential/ac-service.webp', alt: 'Residential AC refrigerant service' },
   { src: '/images/residential/ac-unit.webp', alt: 'Residential AC unit service' },
-  { src: '/images/residential/water-heater.webp', alt: 'Water heater installation' },
 ]
 
 export default function Home() {
@@ -58,7 +57,6 @@ export default function Home() {
             { title: 'Commercial HVAC', desc: 'Rooftop unit installation, maintenance, and repair for commercial buildings and restaurants.' },
             { title: 'Residential AC', desc: 'Air conditioning service, refrigerant charging, and system diagnostics for your home.' },
             { title: 'Kitchen Equipment', desc: 'Commercial kitchen exhaust fans, ventilation systems, and equipment installation.' },
-            { title: 'Water Heaters', desc: 'Water heater installation, repair, and replacement for residential and commercial properties.' },
           ].map((s) => (
             <div key={s.title} className="p-6 border border-blue-100 dark:border-blue-800 rounded-xl bg-blue-50/50 dark:bg-blue-900/20">
               <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">{s.title}</h3>
