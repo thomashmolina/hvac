@@ -1,4 +1,5 @@
 import InquiryForm from '../components/InquiryForm'
+import { Snowflake, Flame, Building2, ChefHat } from 'lucide-react'
 
 const reviews = [
   {
@@ -23,25 +24,25 @@ const reviews = [
 
 const services = [
   {
-    icon: '❄️',
+    Icon: Snowflake,
     title: 'Residential AC',
     desc: 'Air conditioning service, refrigerant charging, and system diagnostics for your home.',
     items: ['AC Repair & Installation', 'Refrigerant Recharge', 'System Diagnostics'],
   },
   {
-    icon: '🔥',
+    Icon: Flame,
     title: 'Heating & Furnace',
     desc: 'Furnace repair, installation, and maintenance to keep your home warm all winter.',
     items: ['Furnace Repair', 'Furnace Installation', 'Heating System Tune-Up'],
   },
   {
-    icon: '🏢',
+    Icon: Building2,
     title: 'Commercial HVAC',
     desc: 'Rooftop unit installation, maintenance, and repair for commercial buildings and restaurants.',
     items: ['Rooftop Unit Service', 'Commercial Refrigerant', 'Preventive Maintenance'],
   },
   {
-    icon: '🍳',
+    Icon: ChefHat,
     title: 'Kitchen Equipment',
     desc: 'Commercial kitchen exhaust fans, ventilation systems, and equipment installation.',
     items: ['Exhaust Fan Install', 'Ventilation Systems', 'Equipment Service'],
@@ -141,8 +142,10 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((s) => (
             <div key={s.title} className="p-6 border border-blue-100 dark:border-blue-800 rounded-xl bg-blue-50/50 dark:bg-blue-900/20">
-              <div className="text-2xl mb-2">{s.icon}</div>
-              <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">{s.title}</h3>
+              <h3 className="flex items-center gap-2.5 text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                <s.Icon className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0" />
+                {s.title}
+              </h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">{s.desc}</p>
               <ul className="text-sm text-gray-500 dark:text-gray-400 space-y-1">
                 {s.items.map((item) => (
